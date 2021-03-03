@@ -18,6 +18,10 @@ parser.add_argument('temp')
 parser.add_argument('date')
 parser.add_argument('time')
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render('404.html'), 404
+
 @app.route('/')
 def home():
     rowCount = Sensor.query.count()
