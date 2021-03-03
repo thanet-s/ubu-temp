@@ -24,7 +24,7 @@ class RpiStatus(db.Model):
 
     def isActive(self):
         now = datetime.now()
-        timediff = (now - self.lastActive).total_second()
+        timediff = (now - self.lastActive).total_seconds()
         if timediff > 60:
             return f'Offline'
         else:

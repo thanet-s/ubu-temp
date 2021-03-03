@@ -1,5 +1,7 @@
-from re import template
-from flask import Flask
+from flask import (
+    Flask,
+    render_template as render
+)
 from flask_restful import reqparse, Api, Resource
 from models import db, Sensor, RpiStatus
 from datetime import date, time
@@ -18,8 +20,8 @@ parser.add_argument('time')
 
 @app.route('/')
 def home():
-    x = Sensor.query.all()
-    return f'{x}'
+    rowCount = Sensor.query.count()
+    return render('index.html', rowCount=rowCount)
 
 class addSensor(Resource):
     def post(self):
@@ -37,7 +39,29 @@ class addSensor(Resource):
             'status': 'OK'
         }
 
+class statusUpdate(Resource):
+    def get(self, id):
+        id = int(id)
+        status = RpiStatus.query.get(id)
+        status.updateStatus()
+        db.session.add(status)
+        db.session.commit()
+        return {
+            'status':'OK'
+        }
+
+class getStatus(Resource):
+    def get(self):
+        return {
+            "twc": RpiStatus.query.get(1).isActive(),
+            "aa": RpiStatus.query.get(2).isActive(),
+            "knw1": RpiStatus.query.get(3).isActive(),
+            "knw2": RpiStatus.query.get(4).isActive(),
+        }
+
 api.add_resource(addSensor, '/addsensor')
+api.add_resource(statusUpdate, '/update/<id>')
+api.add_resource(getStatus, '/getstatus')
 
 
 if __name__ == '__main__':

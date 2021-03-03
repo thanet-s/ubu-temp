@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBU-TEMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/coco.css') }}">
+    <script src="{{ url_for('static', filename='js/jed.js') }}"></script>
+</head>
+
+<body onload="getStatus()">
+    <nav class="navbar navbar-dark bg-white">
+        <a href="/"><span class="text-dark navbar-brand mb-0 h1">UBU-TEMP</span></a>
+        <span class="text-dark navbar-text">
+            <p>Dataset ทั้งหมด {{ rowCount }} แถว</p>
+        </span>
+    </nav>
+
+    <!--Status-->
+    <div class="jumbotron">
+        <div class="row w-100">
+            <div class="col-md-3">
+                <div class="card border-info mx-sm-1 p-3">
+                    <div class="text-info text-center mt-3">
+                        <h4>ทวีชัย</h4>
+                    </div>
+                    <div class="text-info text-center mt-2">
+                        <h1 id='twc'>...</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success mx-sm-1 p-3">
+                    <div class="text-success text-center mt-3">
+                        <h4>เอเอเพลส</h4>
+                    </div>
+                    <div class="text-success text-center mt-2">
+                        <h1 id='aa'>...</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-danger mx-sm-1 p-3">
+                    <div class="text-danger text-center mt-3">
+                        <h4>กนกวรรณ ชั้น1</h4>
+                    </div>
+                    <div class="text-danger text-center mt-2">
+                        <h1 id='knw1'>...</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-warning mx-sm-1 p-3">
+                    <div class="text-warning text-center mt-3">
+                        <h4>กนกวรรณ ชั้น3</h4>
+                    </div>
+
+                    <div class="text-warning text-center mt-2">
+                        <h1 id='knw2'>...</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <h1 class="Main-topic">คาดการณ์หาอุณหภูมิ</h1>
+                <select class="form-control form-control-lg">
+                    <option>หอพัก กนกวรรณ</option>
+                    <option>หอพัก AA</option>
+                    <option>หอพัก ทวีชัย</option>
+                </select>
+                </br>
+
+                <select class="form-control form-control-lg">
+                    <option>มกราคม</option>
+                    <option>กุมภาพันธ์</option>
+                    <option>มีนาคม</option>
+                    <option>เมษายน</option>
+                    <option>พฤษภาคม</option>
+                    <option>มิถุนายน</option>
+                    <option>กรกฎาคม</option>
+                    <option>สิงหาคม</option>
+                    <option>กันยายน</option>
+                    <option>ตุลาคม</option>
+                    <option>พฤศจิกายน</option>
+                    <option>ธันวาคม</option>
+                </select>
+                </br>
+
+                <!--Time picker -->
+                <div>
+                    <input type="number" min="0" max="23" placeholder="23">:
+                    <input type="number" min="0" max="59" placeholder="00">
+                </div>
+                </br>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container1">
+        <button type="submit" class="btn btn-default">Submit</button>
+        </br>
+        </br>
+        <center>
+            <div class="col-md-2">
+                <div class="card border-danger mx-sm-1 p-3">
+                    <div class="root">ผลลัพธ์คือ 30c</div>
+                </div>
+            </div>
+        </center>
+    </div>
+    <footer>UBUstudent@ubu.ac.th </footer>
+    <script src="{{ url_for('static', filename='js/RpiStatus.js') }}"></script>
+</body>
+
+
+</html>
