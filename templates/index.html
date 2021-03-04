@@ -78,41 +78,46 @@
         <div class="form-group row">
             <div class="col-sm-12">
                 <h1 class="Main-topic">คาดการณ์หาอุณหภูมิ</h1>
-                <select class="form-control form-control-lg">
-                    <option>หอพัก กนกวรรณ</option>
-                    <option>หอพัก AA</option>
-                    <option>หอพัก ทวีชัย</option>
-                </select>
-                </br>
+                <!-- <form> -->
+                    <select class="form-control form-control-lg">
+                        <option value="3">หอพัก กนกวรรณ ชั้น1</option>
+                        <option value="4">หอพัก กนกวรรณ ชั้น3</option>
+                        <option value="2">หอพัก AA</option>
+                        <option value="1">หอพัก ทวีชัย</option>
+                    </select>
+                    </br>
 
-                <select class="form-control form-control-lg">
-                    <option>มกราคม</option>
-                    <option>กุมภาพันธ์</option>
-                    <option>มีนาคม</option>
-                    <option>เมษายน</option>
-                    <option>พฤษภาคม</option>
-                    <option>มิถุนายน</option>
-                    <option>กรกฎาคม</option>
-                    <option>สิงหาคม</option>
-                    <option>กันยายน</option>
-                    <option>ตุลาคม</option>
-                    <option>พฤศจิกายน</option>
-                    <option>ธันวาคม</option>
-                </select>
-                </br>
+                    <select class="form-control form-control-lg">
+                        <option>มกราคม</option>
+                        <option>กุมภาพันธ์</option>
+                        <option>มีนาคม</option>
+                        <option>เมษายน</option>
+                        <option>พฤษภาคม</option>
+                        <option>มิถุนายน</option>
+                        <option>กรกฎาคม</option>
+                        <option>สิงหาคม</option>
+                        <option>กันยายน</option>
+                        <option>ตุลาคม</option>
+                        <option>พฤศจิกายน</option>
+                        <option>ธันวาคม</option>
+                    </select>
+                    </br>
 
-                <!--Time picker -->
-                <div>
-                    <input type="number" min="0" max="23" placeholder="23">:
-                    <input type="number" min="0" max="59" placeholder="00">
-                </div>
-                </br>
+                    <!--Time picker -->
+                    <p>เลือกเวลา</p>
+                    <div>
+                        <input type="number" min="0" max="23" placeholder="23">:
+                        <input type="number" min="0" max="59" placeholder="00">
+                    </div>
+                    </br>
+                    <button type="submit" class="btn btn-default" onclick="getStatus()">Submit</button>
+                <!-- </form> -->
             </div>
         </div>
     </div>
     </div>
     <div class="container1">
-        <button type="submit" class="btn btn-default">Submit</button>
+
         </br>
         </br>
         <center>
