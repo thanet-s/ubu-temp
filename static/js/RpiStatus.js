@@ -1,7 +1,7 @@
-let twc = document.getElementById('twc');
-let aa = document.getElementById('aa');
-let knw1 = document.getElementById('knw1');
-let knw2 = document.getElementById('knw2');
+const twc = document.getElementById('twc');
+const aa = document.getElementById('aa');
+const knw1 = document.getElementById('knw1');
+const knw2 = document.getElementById('knw2');
 
 async function getData() {
     const response = await fetch('/getstatus');

@@ -9,17 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/coco.css') }}">
-    <script src="{{ url_for('static', filename='js/jed.js') }}"></script>
 </head>
 
-<body onload="getStatus()">
+<body onload="getStatus(); monthFilter({{ months }});">
     <nav class="navbar navbar-dark bg-white">
         <a href="/"><span class="text-dark navbar-brand mb-0 h1">UBU-TEMP</span></a>
         <span class="text-dark navbar-text">
@@ -77,47 +70,33 @@
     <div class="container">
         <div class="form-group row">
             <div class="col-sm-12">
-                <h1 class="Main-topic">คาดการณ์หาอุณหภูมิ</h1>
+                <h1 class="Main-topic" id='tests'>คาดการณ์หาอุณหภูมิ</h1>
                 <!-- <form> -->
-                    <select class="form-control form-control-lg">
-                        <option value="3">หอพัก กนกวรรณ ชั้น1</option>
-                        <option value="4">หอพัก กนกวรรณ ชั้น3</option>
-                        <option value="2">หอพัก AA</option>
-                        <option value="1">หอพัก ทวีชัย</option>
-                    </select>
-                    </br>
+                <select class="form-control form-control-lg">
+                    <option value="3">หอพัก กนกวรรณ ชั้น1</option>
+                    <option value="4">หอพัก กนกวรรณ ชั้น3</option>
+                    <option value="2">หอพัก AA</option>
+                    <option value="1">หอพัก ทวีชัย</option>
+                </select>
+                </br>
 
-                    <select class="form-control form-control-lg">
-                        <option>มกราคม</option>
-                        <option>กุมภาพันธ์</option>
-                        <option>มีนาคม</option>
-                        <option>เมษายน</option>
-                        <option>พฤษภาคม</option>
-                        <option>มิถุนายน</option>
-                        <option>กรกฎาคม</option>
-                        <option>สิงหาคม</option>
-                        <option>กันยายน</option>
-                        <option>ตุลาคม</option>
-                        <option>พฤศจิกายน</option>
-                        <option>ธันวาคม</option>
-                    </select>
-                    </br>
+                <select class="form-control form-control-lg" id="inject"></select>
+                </br>
 
-                    <!--Time picker -->
-                    <p>เลือกเวลา</p>
-                    <div>
-                        <input type="number" min="0" max="23" placeholder="23">:
-                        <input type="number" min="0" max="59" placeholder="00">
-                    </div>
-                    </br>
-                    <button type="submit" class="btn btn-default" onclick="getStatus()">Submit</button>
+                <!--Time picker -->
+                <p>เลือกเวลา</p>
+                <div>
+                    <input type="number" min="0" max="23" placeholder="23">:
+                    <input type="number" min="0" max="59" placeholder="00">
+                </div>
+                </br>
+                <button type="submit" class="btn btn-default" onclick="getStatus()">Submit</button>
                 <!-- </form> -->
             </div>
         </div>
     </div>
     </div>
     <div class="container1">
-
         </br>
         </br>
         <center>
@@ -129,8 +108,15 @@
         </center>
     </div>
     <footer>UBUstudent@ubu.ac.th </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/RpiStatus.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jed.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/showmonth.js') }}"></script>
 </body>
-
 
 </html>

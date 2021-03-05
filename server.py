@@ -5,6 +5,7 @@ from flask import (
 from flask_restful import reqparse, Api, Resource
 from models import db, Sensor, RpiStatus
 from datetime import date, time
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ubu-temp.db'
@@ -25,7 +26,11 @@ def page_not_found(e):
 @app.route('/')
 def home():
     rowCount = Sensor.query.count()
-    return render('index.html', rowCount=rowCount)
+    months = list(map(
+        lambda dtt : str(dtt[0].month),
+        Sensor.query.group_by(func.strftime('%m', Sensor.date)).with_entities(Sensor.date).all()
+    ))
+    return render('index.html', rowCount=rowCount, months=months)
 
 class addSensor(Resource):
     def post(self):
