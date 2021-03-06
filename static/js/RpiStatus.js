@@ -14,5 +14,5 @@ async function getData() {
 
 function getStatus() {
     getData();
-    return (setInterval(getData, 60000));
+    return (setInterval(getData, 30000));
 }
