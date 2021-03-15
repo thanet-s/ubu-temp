@@ -18,7 +18,7 @@ footer {
 }
 
 body {
-  background-color: rgb(248, 153, 153);
+  background: linear-gradient(to right, #9796f0, #fbc7d4);
   /* background: rgb(255,45,45);
 background: linear-gradient(180deg, rgba(255,45,45,1) 0%, rgba(218,233,148,1) 100%); */
 }

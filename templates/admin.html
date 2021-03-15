@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'RocknRoll One', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #9796f0, #fbc7d4);
+    }
+
+    .card {
+      text-align: center;
+      margin-top: 4.5rem;
+
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 0.6rem;
+    }
+
+    .container1 {
+      padding-left: 500px;
+      padding-right: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">UBU-TEMP</a>
+  </nav>
+
+  <div class="container1">
+    <div class="card">
+      <div class="card-header">
+        Management
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>Last Train</p>
+          <p>{{ lastTrain }}</p>
+        </blockquote>
+      </div>
+
+      <div>
+        <form method="post">
+          <button type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Train Model
+          </button>
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+</body>
+
+</html>

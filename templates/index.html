@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/coco.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </head>
 
 <body onload="getStatus(); monthFilter({{ months }});">
@@ -83,27 +88,27 @@
         <div class="form-group row">
             <div class="col-sm-12">
                 <p class="Main-topic" id='tests'>คาดการณ์หาอุณหภูมิ</p>
-                <!-- <form> -->
-                <select class="form-control form-control-lg">
-                    <option value="3">หอพัก กนกวรรณ ชั้น1</option>
-                    <option value="4">หอพัก กนกวรรณ ชั้น3</option>
-                    <option value="2">หอพัก AA</option>
-                    <option value="1">หอพัก ทวีชัย</option>
-                </select>
-                </br>
+                <form id="formPred">
+                    <select class="form-control form-control-lg" name="rpiId">
+                        <option value="3">หอพัก กนกวรรณ ชั้น1</option>
+                        <option value="4">หอพัก กนกวรรณ ชั้น3</option>
+                        <option value="2">หอพัก AA</option>
+                        <option value="1">หอพัก ทวีชัย</option>
+                    </select>
+                    </br>
 
-                <select class="form-control form-control-lg" id="inject"></select>
-                </br>
+                    <select class="form-control form-control-lg" id="inject" name="date"></select>
+                    </br>
 
-                <!--Time picker -->
-                <p>เลือกเวลา</p>
-                <div>
-                    <input type="number" min="0" max="23" placeholder="23">:
-                    <input type="number" min="0" max="59" placeholder="00">
-                </div>
-                </br>
-                <button type="submit" class="btn btn-default" onclick="getStatus()">Submit</button>
-                <!-- </form> -->
+                    <!--Time picker -->
+                    <p>เลือกเวลา</p>
+                    <div>
+                        <input type="number" min="0" max="23" placeholder="23" name="time" required>:
+                        <input type="number" min="0" max="59" placeholder="00" name="minute" required>
+                    </div>
+                    </br>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -112,22 +117,31 @@
         </br>
         </br>
         <center>
-            <div class="col-md-2">
-                <div class="card border-danger mx-sm-1 p-3">
-                    <div class="root">ผลลัพธ์คือ 30c</div>
-                </div>
-            </div>
+            <div class="col-md-2" id="result"></div>
         </center>
     </div>
-    <footer class="text-muted"><p>Copyright © 2021 By UBU student.</p></footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <footer class="text-muted">
+        <p>Copyright © 2021 By UBU student.</p>
+    </footer>
     <script src="{{ url_for('static', filename='js/RpiStatus.js') }}"></script>
     <script src="{{ url_for('static', filename='js/showmonth.js') }}"></script>
+    <script>
+        $(function () {
+            var formPred = $('#formPred');
+
+            formPred.submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    "data": formPred.serialize(),
+                    "method": "POST",
+                    "success": (data, textStatus, jqXHR) => {
+                        $('#result').html(`<div class="card border-danger mx-sm-1 p-3"><div class="root">ผลลัพธ์คือ ${data.temp}°C</div></div>`);
+                    },
+                    "url": "/pred",
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
