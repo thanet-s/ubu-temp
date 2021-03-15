@@ -1,6 +1,6 @@
 from flask import (
     Flask,
-    render_template as render
+    render_template as render,
 )
 from flask_restful import reqparse, Api, Resource
 from models import db, Sensor, RpiStatus
@@ -61,16 +61,39 @@ class statusUpdate(Resource):
 
 class getStatus(Resource):
     def get(self):
-        return {
-            "twc": RpiStatus.query.get(1).isActive(),
-            "aa": RpiStatus.query.get(2).isActive(),
-            "knw1": RpiStatus.query.get(3).isActive(),
-            "knw2": RpiStatus.query.get(4).isActive(),
+        lastTemp = {
+            'twc' : Sensor.query.filter(Sensor.rpiId == 1).order_by(Sensor.id.desc()).first(),
+            'aa' : Sensor.query.filter(Sensor.rpiId == 2).order_by(Sensor.id.desc()).first(),
+            'knw1' : Sensor.query.filter(Sensor.rpiId == 3).order_by(Sensor.id.desc()).first(),
+            'knw2' : Sensor.query.filter(Sensor.rpiId == 4).order_by(Sensor.id.desc()).first()
         }
+        return {
+            "twc": [RpiStatus.query.get(1).isActive(), f'{lastTemp["twc"].temp}℃'],
+            "aa": [RpiStatus.query.get(2).isActive(), f'{lastTemp["aa"].temp}℃'],
+            "knw1": [RpiStatus.query.get(3).isActive(), f'{lastTemp["knw1"].temp}℃'],
+            "knw2": [RpiStatus.query.get(4).isActive(), f'{lastTemp["knw2"].temp}℃'],
+        }
+
+class getSensorData(Resource):
+    def get(self):
+        sensor = Sensor.query.all()
+        sensorjson = []
+        
+        for i in sensor:
+            sensorjson.append({
+                'rpiId': i.rpiId,
+                'temp': i.temp,
+                'date': int(i.date.strftime("%m")),
+                'hour': int(i.time.strftime("%H")),
+                'minute': int(i.time.strftime("%M"))
+            })
+        return { "sensors": sensorjson}
+        
 
 api.add_resource(addSensor, '/addsensor')
 api.add_resource(statusUpdate, '/update/<id>')
 api.add_resource(getStatus, '/getstatus')
+api.add_resource(getSensorData, '/getdata')
 
 
 if __name__ == '__main__':
