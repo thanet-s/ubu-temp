@@ -135,7 +135,7 @@
                     "data": formPred.serialize(),
                     "method": "POST",
                     "success": (data, textStatus, jqXHR) => {
-                        $('#result').html(`<div class="card border-danger mx-sm-1 p-3"><div class="root">ผลลัพธ์คือ ${data.temp}°C</div></div>`);
+                        $('#result').html(`<div class="card border-danger mx-sm-1 p-3"><div class="h2 text-warning root">ผลลัพธ์คือ ${data.temp}°C</div></div>`);
                     },
                     "url": "/pred",
                 });
